@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float Gravity = 9.8f;
     public float JumpForce;
     public float Speed;
-    public Animator Animator;
+    //public Animator Animator;
     private float _fallVelocity = 0;
     private CharacterController _characterController;
     private Vector3 _moveVector;
@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _fallVelocity = 0;
-            Animator.SetBool("IsGrounded", true);
         }
     }
 }
