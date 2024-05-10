@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _characterController.Move(_moveVector * Time.fixedDeltaTime * Speed);
+        _characterController.Move(_moveVector.normalized * Time.fixedDeltaTime * Speed);
         _fallVelocity += Gravity * Time.fixedDeltaTime;
         _characterController.Move(Vector3.down * _fallVelocity * Time.fixedDeltaTime);
 

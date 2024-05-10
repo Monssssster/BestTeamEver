@@ -15,7 +15,7 @@ public class Raycast : MonoBehaviour
 
     private void Start()
     {
-        Counter.text = "Cubes collected " + ItemCount;
+        Counter.text = "Boxes collected: " + ItemCount;
     }
 
     void Update()
@@ -29,14 +29,14 @@ public class Raycast : MonoBehaviour
                 Info.text = null;
             }
             
-            if (hit.collider.tag == "Cube")
+            if (hit.collider.tag == "Box")
             {
-                Info.text = "Cube";
+                Info.text = "Box";
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     ItemCount++;
-                    Counter.text = "Cubes collected: " + ItemCount;
+                    Counter.text = "Boxes collected: " + ItemCount;
                     Destroy(hit.collider.gameObject);
                 }
             }
@@ -45,7 +45,7 @@ public class Raycast : MonoBehaviour
             {
                 Info.text = "Exit";
 
-                if (Input.GetKeyDown(KeyCode.E) && ItemCount == 5)
+                if (Input.GetKeyDown(KeyCode.E) && ItemCount == 10)
                 {
                     SceneManager.LoadScene(0);
                 }

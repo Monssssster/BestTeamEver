@@ -8,11 +8,11 @@ TagManager:
   - Key
   - Locked
   - CombinationLocked
-  - Cube
   - Exit
   - Coin
   - CodelockButton
   - Water
+  - Box
   layers:
   - Default
   - TransparentFX
