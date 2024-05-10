@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RaycastSystem : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class RaycastSystem : MonoBehaviour
     RaycastHit hit;
     public TextMeshProUGUI Info;
     public TextMeshProUGUI NeedKey;
+    public AudioSource KeyPick;
 
     void Update()
     {
@@ -27,6 +29,7 @@ public class RaycastSystem : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    KeyPick.Play();
                     Destroy(Key);
                     Destroy(NeedKey);
                     KeyIsFound = true;
@@ -40,6 +43,15 @@ public class RaycastSystem : MonoBehaviour
                 {
                     Door door = hit.collider.GetComponent<Door>();
                     door.Using();
+                }
+            }
+            if (hit.collider.tag == "Exit")
+            {
+                Info.text = "Exit";
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    SceneManager.LoadScene(3);
                 }
             }
             if (hit.collider.tag == "Locked")

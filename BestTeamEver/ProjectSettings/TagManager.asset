@@ -8,15 +8,20 @@ TagManager:
   - Key
   - Locked
   - CombinationLocked
+  - Cube
+  - Exit
+  - Coin
+  - CodelockButton
+  - Water
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Fireball
+  - Codelock
   - 
   - 
   - 
