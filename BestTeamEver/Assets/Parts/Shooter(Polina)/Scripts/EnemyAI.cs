@@ -1,17 +1,23 @@
-
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class EnemyAI : MonoBehaviour
 {
+    public Transform PlayerBody;
     public List<Transform> TPoints;
     public PlayerController Player;
+    
     public float ViewAngle;
     public float Damage = 30;
+    public float Delay = 1;
+    public float ElapsedTime = 0;
 
     private NavMeshAgent _agent;
     private PlayerHealth _playerHealth;
+    private EnemyHealth _enemyHealth;
     private bool _isPlayerNoticed;
 
     void Start()
@@ -19,9 +25,15 @@ public class EnemyAI : MonoBehaviour
         Components();
     }
 
+    public bool IsAlive()
+    {
+        return _enemyHealth.IsAlive();
+    }
+
 
     void Update()
     {
+        ElapsedTime += Time.deltaTime;
         NotiecePlayerUpdate();
         ChaseUpdate();
         PatrolUnpade();
@@ -32,6 +44,7 @@ public class EnemyAI : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _playerHealth = Player.GetComponent<PlayerHealth>();
+        _enemyHealth = GetComponent<EnemyHealth>();
     }
 
     private void PatrolUnpade()

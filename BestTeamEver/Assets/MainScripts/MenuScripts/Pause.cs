@@ -32,6 +32,8 @@ public class Pause : MonoBehaviour
         _pausePanel.SetActive(true);
         Time.timeScale = 0;
         _isPaused = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void ResumeGame()
@@ -40,6 +42,8 @@ public class Pause : MonoBehaviour
         _choosePanel.SetActive(false);
         Time.timeScale = 1;
         _isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void MainMenuButton()
