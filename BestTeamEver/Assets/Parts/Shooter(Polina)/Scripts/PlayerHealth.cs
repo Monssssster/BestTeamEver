@@ -6,9 +6,10 @@ public class PlayerHealth : MonoBehaviour
 {
     public float HealthValue = 100;
     public RectTransform ValueRectTransform;
-    //public GameObject InGameUI;
-    //public GameObject GameOverScreen;
-    //public AudioSource LoseSound;
+    public GameObject InGameUI;
+    public GameObject GameOverScreen;
+    public GameObject PauseController;
+    public AudioSource LoseSound;
 
     private float _maxValue;
 
@@ -30,16 +31,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void PlayerIsDead()
     {
-        //InGameUI.SetActive(false);
-        //GameOverScreen.SetActive(true);
+        PauseController.SetActive(false);
+        InGameUI.SetActive(false);
+        GameOverScreen.SetActive(true);
         GetComponent<PlayerController>().enabled = false;
         GetComponent<CameraRotate>().enabled = false;
         GetComponent<NRGBallCaster>().enabled = false;
         GetComponent<CharacterController>().enabled = false;
         GetComponent<GrenadeCaster>().enabled = false;
-        GetComponent<UltimateCaster>().enabled = false;
 
-        //LoseSound.Play();
+        LoseSound.Play();
     }
     public void DrawHealthBar()
     {

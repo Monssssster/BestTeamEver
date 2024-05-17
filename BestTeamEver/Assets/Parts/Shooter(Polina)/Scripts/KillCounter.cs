@@ -7,50 +7,33 @@ using TMPro;
 public class KillCounter : MonoBehaviour
 {
     public static int KillCount;
-    public GameObject LockGrenade;
-    public GameObject LockUltimate;
     public GameObject EnemySpawner;
-    public GameObject GrenadeSpawners;
-    public GameObject Bowl;
-    public GameObject BowlPlace;
+    public GameObject DoorTrigger;
     public TextMeshProUGUI CountText;
-    public AudioSource Unlock;
 
     private void Start()
     {
         OffScripts();
+        KillCount = 0;
+        CountText.text = "Enemies killed: " + KillCount;
     }
     private void Update()
     {
-        CountText.text = KillCount.ToString();
+        CountText.text = "Enemies killed: " + KillCount;
         UnlockGrenade();
-        UnlockUltimate();
         DestroyEnemySpawner();
     }
     
     private void OffScripts()
     {
         GetComponent<GrenadeCaster>().enabled = false;
-        GetComponent<UltimateCaster>().enabled = false;
     }
    
     private void UnlockGrenade()
     {
-        if (KillCount >= 5 & LockGrenade != null)
+        if (KillCount >= 5)
         {
-            Unlock.Play();
-            Destroy(LockGrenade);
             GetComponent<GrenadeCaster>().enabled = true;
-        }
-    }
-
-    private void UnlockUltimate()
-    {
-        if (KillCount >= 10 & LockUltimate != null)
-        {
-            Unlock.Play();
-            Destroy(LockUltimate);
-            GetComponent<UltimateCaster>().enabled = true;
         }
     }
 
@@ -58,11 +41,14 @@ public class KillCounter : MonoBehaviour
     {
         if (KillCount >= 20 & EnemySpawner != null)
         {
-            Unlock.Play();
             Destroy(EnemySpawner);
-            Destroy(GrenadeSpawners);
-            Bowl.transform.position = BowlPlace.transform.position;
+            EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
+            foreach (EnemyHealth enemy in enemies)
+            {
+                Destroy(enemy.gameObject);
+            }
             GetComponent<KillCounter>().enabled = false;
+            DoorTrigger.SetActive(true);
         }
     }
 }

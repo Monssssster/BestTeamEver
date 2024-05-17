@@ -23,7 +23,7 @@ public class EnemySpawnerController : MonoBehaviour
 
     private void ScriptOn()
     {
-        if (Count >= 1 & DoorCloseTrigger != null)
+        if (Count >= 0 & DoorCloseTrigger == null)
         {
             GetComponent<EnemySpawner>().enabled = true;
         }

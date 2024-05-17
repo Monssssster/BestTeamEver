@@ -6,14 +6,10 @@ using UnityEngine.EventSystems;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform PlayerBody;
     public List<Transform> TPoints;
     public PlayerController Player;
-    
     public float ViewAngle;
     public float Damage = 30;
-    public float Delay = 1;
-    public float ElapsedTime = 0;
 
     private NavMeshAgent _agent;
     private PlayerHealth _playerHealth;
@@ -30,10 +26,8 @@ public class EnemyAI : MonoBehaviour
         return _enemyHealth.IsAlive();
     }
 
-
     void Update()
     {
-        ElapsedTime += Time.deltaTime;
         NotiecePlayerUpdate();
         ChaseUpdate();
         PatrolUnpade();
@@ -91,14 +85,14 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Angle(transform.forward, direction) < ViewAngle)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up, direction, out hit))
+            if (Physics.Raycast(transform.position + new Vector3(0,0.3f,0), direction, out hit))
             {
                 if (hit.collider.gameObject == Player.gameObject)
                 {
                     _isPlayerNoticed = true;
+                    print("Player Noticed");
                 }
             }
         }
     }
-
 }

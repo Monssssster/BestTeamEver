@@ -11,7 +11,6 @@ public class NRGBallCaster : MonoBehaviour
     public float Delay = 0.35f;
     public float ElapsedTime = 0f;
     //public AudioSource Shoot;
-    //public Image NRGBallIcon;
 
     void Update()
     {
@@ -29,9 +28,9 @@ public class NRGBallCaster : MonoBehaviour
             Instantiate(NRGBallPrefab, NRGBallSourceTransform.position, NRGBallSourceTransform.rotation);
         }
     }
-    void UpdateNRGBallIcon()
+    /*void UpdateNRGBallIcon()
     {
         float fillAmount = ElapsedTime / Delay;
-        //NRGBallIcon.fillAmount = fillAmount;
-    }
+        NRGBallIcon.fillAmount = fillAmount;
+    }*/
 }

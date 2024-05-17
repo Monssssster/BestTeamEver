@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Horror.unity
     guid: 272daf1258d80ed4488f743cb5a4b319
   - enabled: 1
-    path: Assets/Scenes/Shooter(test).unity
-    guid: 17966effa97080b48ba466150a4c19cc
+    path: Assets/Scenes/Shooter.unity
+    guid: a6caeadbdbc2d14439c0fedc7a17ff8d
   - enabled: 1
     path: Assets/Scenes/Backrooms.unity
     guid: 8612c843a5c06a54ab60684d8c40ad9b

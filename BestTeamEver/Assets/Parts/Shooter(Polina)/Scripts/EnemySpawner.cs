@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     private List<Transform> _spawnerPoints;
     private List<EnemyAI> _enemies;
-    
+
     private float _timeLastSpawned;
 
     private void Start()
@@ -61,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
         for (var i = 0; i < _enemies.Count; i++)
         {
             if (_enemies[i].IsAlive()) continue;
+            Destroy(_enemies[i].gameObject);
             _enemies.RemoveAt(i);
             i--;
         }

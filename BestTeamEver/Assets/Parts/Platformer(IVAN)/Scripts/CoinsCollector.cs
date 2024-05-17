@@ -21,7 +21,7 @@ public class CoinCollector : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             CoinCount++;
-            CoinsText.text = "Crystal Collected: " + CoinCount;
+            CoinsText.text = "Crystals Collected: " + CoinCount;
             CoinCollected.Play();
             Destroy(other.gameObject);
         }

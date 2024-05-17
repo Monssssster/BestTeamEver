@@ -47,6 +47,8 @@ public class Raycast : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E) && ItemCount == 10)
                 {
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
                     SceneManager.LoadScene(0);
                 }
             }

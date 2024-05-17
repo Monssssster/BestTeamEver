@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class UltimateCaster : MonoBehaviour
 {
     public GameObject HexEffectPrefab;
-    public GameObject Gear;
-    public Image SpellIcon;
+    public GameObject Skull;
     public float Cooldown = 10f;
     public AudioSource UltimateSound;
 
@@ -16,7 +15,6 @@ public class UltimateCaster : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        UpdateUltimateIcon();
 
         if (Input.GetKeyDown(KeyCode.E) && _timer >= Cooldown)
         {
@@ -31,16 +29,10 @@ public class UltimateCaster : MonoBehaviour
         {
             Destroy(enemy.gameObject);
             Instantiate(HexEffectPrefab, enemy.transform.position, Quaternion.identity);
-            Instantiate(Gear, enemy.transform.position, enemy.transform.rotation);
+            Instantiate(Skull, enemy.transform.position, enemy.transform.rotation);
         }
         KillCounter.KillCount += 2;
         UltimateSound.Play();
         _timer = 0;
-    }
-
-    void UpdateUltimateIcon()
-    {
-        float fillAmount = _timer / Cooldown;
-        SpellIcon.fillAmount = fillAmount;
     }
 }

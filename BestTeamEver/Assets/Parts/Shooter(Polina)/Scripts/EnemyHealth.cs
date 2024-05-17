@@ -26,6 +26,5 @@ public class EnemyHealth : MonoBehaviour
         var Explosion = Instantiate(ExplosionPrefab);
         Explosion.transform.position = transform.position;
         KillCounter.KillCount++;
-        Destroy(gameObject);
     }
 }
