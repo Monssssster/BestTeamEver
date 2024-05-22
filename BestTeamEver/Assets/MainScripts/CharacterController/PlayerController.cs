@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     public float Gravity = 9.8f;
     public float JumpForce;
     public float Speed;
-    //public Animator Animator;
+    
+    public Animator animator;
+    
     private float _fallVelocity = 0;
     private CharacterController _characterController;
     private Vector3 _moveVector;
@@ -21,41 +23,8 @@ public class PlayerController : MonoBehaviour
     {
         _moveVector = Vector3.zero;
         Speed = 3;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            _moveVector += transform.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _moveVector -= transform.forward;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _moveVector += transform.right;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _moveVector -= transform.right;
-        }
-        if (Input.GetKey(KeyCode.LeftShift)) 
-        {
-            Speed *= 2;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
-        {
-            _fallVelocity = -JumpForce;
-            //Animator.SetBool("IsGrounded", false);
-        }
-        if(_moveVector != Vector3.zero)
-        {
-            //Animator.SetBool("IsRunning", true);
-        }
-        else
-        {
-            //Animator.SetBool("IsRunning", false);
-        }
+        MovementUpdate();
+        JumpUpdate();
 
     }
 
@@ -68,6 +37,47 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _fallVelocity = 0;
+        }
+    }
+
+    private void MovementUpdate()
+    {
+        var RundDirection = 0;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            _moveVector += transform.forward;
+            RundDirection = 1;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            _moveVector -= transform.forward;
+            RundDirection = 2;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            _moveVector += transform.right;
+            RundDirection = 3;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            _moveVector -= transform.right;
+            RundDirection = 4;
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Speed *= 2;
+        }
+
+        animator.SetInteger("RunDirection", RundDirection);
+    }
+
+    private void JumpUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
+        {
+            _fallVelocity = -JumpForce;
+            //Animator.SetBool("IsGrounded", false);
         }
     }
 }

@@ -20,7 +20,7 @@ public class NRGBallCaster : MonoBehaviour
     }
     private void NRGBallCast()
     {
-        if (Input.GetMouseButtonDown(0) && ElapsedTime > Delay)
+        if (Input.GetMouseButtonDown(0) && ElapsedTime > Delay && Time.timeScale != 0)
         {
             //Shoot.pitch = Random.Range(0.7f, 1.3f);
             //Shoot.Play();

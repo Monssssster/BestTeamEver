@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
     public GameObject InGameUI;
     public GameObject GameOverScreen;
     public GameObject PauseController;
+
+    public Animator animator;
+
     public AudioSource LoseSound;
 
     private float _maxValue;
@@ -39,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<NRGBallCaster>().enabled = false;
         GetComponent<CharacterController>().enabled = false;
         GetComponent<GrenadeCaster>().enabled = false;
+        animator.SetTrigger("Death");
 
         LoseSound.Play();
     }

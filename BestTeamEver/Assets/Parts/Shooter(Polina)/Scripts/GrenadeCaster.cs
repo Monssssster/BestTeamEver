@@ -20,7 +20,7 @@ public class GrenadeCaster : MonoBehaviour
     }
     private void GrenadeCast()
     {
-        if (Input.GetMouseButtonDown(1) && ElapsedTime > Delay)
+        if (Input.GetMouseButtonDown(1) && ElapsedTime > Delay && Time.timeScale != 0)
         {
             //GrenadeShoot.pitch = Random.Range(0.7f, 1.3f);
             //GrenadeShoot.Play();

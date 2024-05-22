@@ -56,7 +56,7 @@ public class Codelock : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(Physics.Raycast(Camera_TR.position, Camera_TR.TransformDirection(Vector3.forward), out hit, 7, ray_layermask))
+            if (Physics.Raycast(Camera_TR.position, Camera_TR.TransformDirection(Vector3.forward), out hit, 7, ray_layermask))
             {
                 if(hit.collider.tag == "CodelockButton")
                 {

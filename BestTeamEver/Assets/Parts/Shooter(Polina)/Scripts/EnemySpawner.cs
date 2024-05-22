@@ -8,17 +8,17 @@ public class EnemySpawner : MonoBehaviour
     public EnemyAI EnemyPrefab;
     public PlayerController Player;
     public List<Transform> TPoints;
+    public List<EnemyAI> _enemies;
 
     public int EnemiesMaxCount = 1;
     public float SpawnDelay = 5;
     public float IncreaseEnemiesCountDelay = 30;
 
     private List<Transform> _spawnerPoints;
-    private List<EnemyAI> _enemies;
 
     private float _timeLastSpawned;
 
-    private void Start()
+    public void Start()
     {
         _spawnerPoints = new List<Transform>(transform.GetComponentsInChildren<Transform>().ToList());
         _enemies = new List<EnemyAI>();

@@ -21,6 +21,7 @@ public class KillCounter : MonoBehaviour
     {
         CountText.text = "Enemies killed: " + KillCount;
         UnlockGrenade();
+        UnlockUltimate();
         DestroyEnemySpawner();
     }
     
@@ -34,6 +35,14 @@ public class KillCounter : MonoBehaviour
         if (KillCount >= 5)
         {
             GetComponent<GrenadeCaster>().enabled = true;
+        }
+    }
+
+    private void UnlockUltimate()
+    {
+        if (KillCount >= 10)
+        {
+            GetComponent<UltimateCaster>().enabled = true;
         }
     }
 

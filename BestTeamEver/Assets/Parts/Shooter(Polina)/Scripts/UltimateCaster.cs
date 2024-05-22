@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UltimateCaster : MonoBehaviour
 {
-    public GameObject HexEffectPrefab;
     public GameObject Skull;
     public float Cooldown = 10f;
     public AudioSource UltimateSound;
 
+    private EnemySpawner EnemyList; 
+
     float _timer = 0f;
 
-    void Update()
+    private void Start()
+    {
+        EnemyList = GetComponent<EnemySpawner>();    
+    }
+
+    private void Update()
     {
         _timer += Time.deltaTime;
 
@@ -22,15 +25,15 @@ public class UltimateCaster : MonoBehaviour
         }
     }
 
-    void CastHex()
+    private void CastHex()
     {
         EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
         foreach (EnemyHealth enemy in enemies)
         {
             Destroy(enemy.gameObject);
-            Instantiate(HexEffectPrefab, enemy.transform.position, Quaternion.identity);
             Instantiate(Skull, enemy.transform.position, enemy.transform.rotation);
         }
+        EnemyList._enemies.Clear();
         KillCounter.KillCount += 2;
         UltimateSound.Play();
         _timer = 0;
