@@ -9,7 +9,14 @@ public class KillCounter : MonoBehaviour
     public static int KillCount;
     public GameObject EnemySpawner;
     public GameObject DoorTrigger;
+
+    public bool GrenadeIsLocked = true;
+    public bool UltimateIsLocked = true;
+    public bool EnemiesLeft = true;
+
     public TextMeshProUGUI CountText;
+
+    public AudioSource UnlockSound;
 
     private void Start()
     {
@@ -32,23 +39,27 @@ public class KillCounter : MonoBehaviour
    
     private void UnlockGrenade()
     {
-        if (KillCount >= 5)
+        if (KillCount >= 5 && GrenadeIsLocked)
         {
             GetComponent<GrenadeCaster>().enabled = true;
+            GrenadeIsLocked = false;
+            UnlockSound.Play();
         }
     }
 
     private void UnlockUltimate()
     {
-        if (KillCount >= 10)
+        if (KillCount >= 10 && UltimateIsLocked)
         {
             GetComponent<UltimateCaster>().enabled = true;
+            UltimateIsLocked = false;
+            UnlockSound.Play();
         }
     }
 
     private void DestroyEnemySpawner()
     {
-        if (KillCount >= 20 & EnemySpawner != null)
+        if (KillCount >= 20 && EnemySpawner != null && EnemiesLeft)
         {
             Destroy(EnemySpawner);
             EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
@@ -58,6 +69,7 @@ public class KillCounter : MonoBehaviour
             }
             GetComponent<KillCounter>().enabled = false;
             DoorTrigger.SetActive(true);
+            EnemiesLeft = false;
         }
     }
 }

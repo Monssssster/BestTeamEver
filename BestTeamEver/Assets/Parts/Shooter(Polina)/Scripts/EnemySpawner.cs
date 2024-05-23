@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
         for (var i = 0; i < _enemies.Count; i++)
         {
             if (_enemies[i].IsAlive()) continue;
-            Destroy(_enemies[i].gameObject);
+            Destroy(_enemies[i].gameObject, 3);
             _enemies.RemoveAt(i);
             i--;
         }

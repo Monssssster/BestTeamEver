@@ -2,24 +2,20 @@ using UnityEngine;
 
 public class UltimateCaster : MonoBehaviour
 {
-    public GameObject Skull;
+    public UltraFireball UltraNRGBallPrefab;
+
+    public Transform NRGBallSourceTransform;
     public float Cooldown = 10f;
-    public AudioSource UltimateSound;
 
-    private EnemySpawner EnemyList; 
+    public AudioSource Shoot;
 
-    float _timer = 0f;
-
-    private void Start()
-    {
-        EnemyList = GetComponent<EnemySpawner>();    
-    }
+    float _ultimateTimer = 0f;
 
     private void Update()
     {
-        _timer += Time.deltaTime;
+        _ultimateTimer += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.E) && _timer >= Cooldown)
+        if (Input.GetKeyDown(KeyCode.E) && _ultimateTimer >= Cooldown && Time.timeScale != 0)
         {
             CastHex();
         }
@@ -27,15 +23,10 @@ public class UltimateCaster : MonoBehaviour
 
     private void CastHex()
     {
-        EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
-        foreach (EnemyHealth enemy in enemies)
-        {
-            Destroy(enemy.gameObject);
-            Instantiate(Skull, enemy.transform.position, enemy.transform.rotation);
-        }
-        EnemyList._enemies.Clear();
-        KillCounter.KillCount += 2;
-        UltimateSound.Play();
-        _timer = 0;
+        Instantiate(UltraNRGBallPrefab, NRGBallSourceTransform.position, NRGBallSourceTransform.rotation);
+        Shoot.pitch = Random.Range(0.7f, 1.3f);
+        Shoot.Play();
+
+        _ultimateTimer = 0;
     }
 }

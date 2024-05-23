@@ -10,7 +10,7 @@ public class NRGBallCaster : MonoBehaviour
     public Transform NRGBallSourceTransform;
     public float Delay = 0.35f;
     public float ElapsedTime = 0f;
-    //public AudioSource Shoot;
+    public AudioSource Shoot;
 
     void Update()
     {
@@ -22,8 +22,8 @@ public class NRGBallCaster : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && ElapsedTime > Delay && Time.timeScale != 0)
         {
-            //Shoot.pitch = Random.Range(0.7f, 1.3f);
-            //Shoot.Play();
+            Shoot.pitch = Random.Range(0.7f, 1.3f);
+            Shoot.Play();
             ElapsedTime = 0;
             Instantiate(NRGBallPrefab, NRGBallSourceTransform.position, NRGBallSourceTransform.rotation);
         }

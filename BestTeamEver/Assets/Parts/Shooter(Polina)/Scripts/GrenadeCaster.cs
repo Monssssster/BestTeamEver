@@ -10,7 +10,7 @@ public class GrenadeCaster : MonoBehaviour
     public float Force = 2000;
     public float Delay = 5.0f;
     public float ElapsedTime = 0.0f;
-    //public AudioSource GrenadeShoot;
+    public AudioSource GrenadeShoot;
     //public Image GrenadeIcon;
     void Update()
     {
@@ -22,8 +22,8 @@ public class GrenadeCaster : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && ElapsedTime > Delay && Time.timeScale != 0)
         {
-            //GrenadeShoot.pitch = Random.Range(0.7f, 1.3f);
-            //GrenadeShoot.Play();
+            GrenadeShoot.pitch = Random.Range(0.7f, 1.3f);
+            GrenadeShoot.Play();
             ElapsedTime = 0.0f;
             var Grenade = Instantiate(GrenadePrefab);
             Grenade.transform.position = GrenadeSourceTransform.position;

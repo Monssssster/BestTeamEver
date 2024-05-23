@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
     public float HealthValue = 100;
-    public Explosion ExplosionPrefab;
+
+    public Animator EnemyAnimator;
+
+    public AudioSource HitSound;
 
     public bool IsAlive()
     {
@@ -19,12 +21,22 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            HitSound.pitch = Random.Range(0.5f, 1.3f);
+            HitSound.Play();
+            EnemyAnimator.SetTrigger("Hit");
+        }
     }
 
     private void Die()
     {
-        var Explosion = Instantiate(ExplosionPrefab);
-        Explosion.transform.position = transform.position;
+        EnemyAnimator.SetTrigger("Death");
+        HitSound.pitch = Random.Range(0.5f, 1.3f);
+        HitSound.Play();
+        GetComponent<EnemyAI>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
         KillCounter.KillCount++;
     }
 }
