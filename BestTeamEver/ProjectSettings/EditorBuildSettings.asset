@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Backrooms.unity
     guid: 8612c843a5c06a54ab60684d8c40ad9b
+  - enabled: 1
+    path: Assets/Scenes/PlotScene.unity
+    guid: 8e76fc96d4a099b468a8cfce09d20496
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 33740b42c0ade8d45ad9ab3eed5a84d6
   m_configObjects: {}

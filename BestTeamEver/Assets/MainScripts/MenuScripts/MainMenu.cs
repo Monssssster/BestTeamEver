@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
     public void LoadPlatformer()
     {
         PlayerPrefs.SetInt("CurrentLevel", 1);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(5);
     }
 
     public void LoadHorror()

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float Gravity = 9.8f;
     public float JumpForce;
     public float Speed;
+    public GameObject BlackScreen;
     
     public Animator animator;
     

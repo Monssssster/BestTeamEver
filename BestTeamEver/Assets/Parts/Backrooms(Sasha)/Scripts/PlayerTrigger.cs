@@ -29,7 +29,7 @@ public class PlayerTrigger : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(6);
         }
     }
 }
