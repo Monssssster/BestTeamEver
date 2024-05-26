@@ -10,13 +10,19 @@ public class KillCounter : MonoBehaviour
     public GameObject EnemySpawner;
     public GameObject DoorTrigger;
 
+
     public bool GrenadeIsLocked = true;
     public bool UltimateIsLocked = true;
+    public bool FifteenKills = false;
     public bool EnemiesLeft = true;
 
     public TextMeshProUGUI CountText;
 
     public AudioSource UnlockSound;
+    public AudioSource SkeletonMusic;
+    public AudioSource SpongeBobMusic;
+    public AudioSource ElephantMusic;
+    public AudioSource BananaCatMusic;
 
     private void Start()
     {
@@ -27,49 +33,69 @@ public class KillCounter : MonoBehaviour
     private void Update()
     {
         CountText.text = "Enemies killed: " + KillCount;
-        UnlockGrenade();
-        UnlockUltimate();
-        DestroyEnemySpawner();
+
+        if (KillCount >= 5 && GrenadeIsLocked)
+        {
+            UnlockGrenade();
+        }
+
+        if (KillCount >= 10 && UltimateIsLocked)
+        {
+            UnlockUltimate();
+        }
+
+        if (KillCount >= 15 && !FifteenKills)
+        {
+            BananaCatMusicPlay();
+            FifteenKills = true;
+        }
+
+        if (KillCount >= 20 && EnemySpawner != null && EnemiesLeft)
+        {
+            DestroyEnemySpawner();
+        }
     }
     
     private void OffScripts()
     {
         GetComponent<GrenadeCaster>().enabled = false;
+        GetComponent<UltimateCaster>().enabled = false;
     }
    
     private void UnlockGrenade()
     {
-        if (KillCount >= 5 && GrenadeIsLocked)
-        {
-            GetComponent<GrenadeCaster>().enabled = true;
-            GrenadeIsLocked = false;
-            UnlockSound.Play();
-        }
+        GetComponent<GrenadeCaster>().enabled = true;
+        GrenadeIsLocked = false;
+        UnlockSound.Play();
+        SkeletonMusic.Stop();
+        SpongeBobMusic.Play();
     }
 
     private void UnlockUltimate()
     {
-        if (KillCount >= 10 && UltimateIsLocked)
-        {
-            GetComponent<UltimateCaster>().enabled = true;
-            UltimateIsLocked = false;
-            UnlockSound.Play();
-        }
+        GetComponent<UltimateCaster>().enabled = true;
+        UltimateIsLocked = false;
+        UnlockSound.Play();
+        SpongeBobMusic.Stop();
+        ElephantMusic.Play();
+    }
+
+    private void BananaCatMusicPlay()
+    {
+        ElephantMusic.Stop();
+        BananaCatMusic.Play();
     }
 
     private void DestroyEnemySpawner()
     {
-        if (KillCount >= 20 && EnemySpawner != null && EnemiesLeft)
+        Destroy(EnemySpawner);
+        EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
+        foreach (EnemyHealth enemy in enemies)
         {
-            Destroy(EnemySpawner);
-            EnemyHealth[] enemies = FindObjectsOfType<EnemyHealth>();
-            foreach (EnemyHealth enemy in enemies)
-            {
-                Destroy(enemy.gameObject);
-            }
-            GetComponent<KillCounter>().enabled = false;
-            DoorTrigger.SetActive(true);
-            EnemiesLeft = false;
+            Destroy(enemy.gameObject);
         }
+        GetComponent<KillCounter>().enabled = false;
+        DoorTrigger.SetActive(true);
+        EnemiesLeft = false;
     }
 }

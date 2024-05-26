@@ -5,7 +5,10 @@ public class EnemyHealth : MonoBehaviour
 {
     public float HealthValue = 100;
 
-    public Animator EnemyAnimator;
+    public Animator SkeletonAnimator;
+    public Animator SpongeBobAnimator;
+    public Animator ElephantAnimator;
+    public Animator BananaCatAnimator;
 
     public AudioSource HitSound;
 
@@ -25,13 +28,19 @@ public class EnemyHealth : MonoBehaviour
         {
             HitSound.pitch = Random.Range(0.5f, 1.3f);
             HitSound.Play();
-            EnemyAnimator.SetTrigger("Hit");
+            SkeletonAnimator.SetTrigger("Hit");
+            SpongeBobAnimator.SetTrigger("Hit");
+            ElephantAnimator.SetTrigger("Hit");
+            BananaCatAnimator.SetTrigger("Hit");
         }
     }
 
     private void Die()
     {
-        EnemyAnimator.SetTrigger("Death");
+        SkeletonAnimator.SetTrigger("Death");
+        SpongeBobAnimator.SetTrigger("Death");
+        ElephantAnimator.SetTrigger("Death");
+        BananaCatAnimator.SetTrigger("Death");
         HitSound.pitch = Random.Range(0.5f, 1.3f);
         HitSound.Play();
         GetComponent<EnemyAI>().enabled = false;

@@ -9,6 +9,7 @@ public class RaycastSystem : MonoBehaviour
     public Transform RayPoint;
     public float Distation = 2;
     public bool KeyIsFound = false;
+    public GameObject Monster;
     public GameObject Key;
     RaycastHit hit;
     public TextMeshProUGUI Info;
@@ -73,6 +74,8 @@ public class RaycastSystem : MonoBehaviour
                 {
                     Door door = hit.collider.GetComponent<Door>();
                     door.Using();
+                    Invoke(nameof(UnhideMonster), 1);
+                    Invoke(nameof(HideMonster), 5);
                 }
             }
         }
@@ -81,5 +84,15 @@ public class RaycastSystem : MonoBehaviour
         {
             Info.text = null;
         }
+    }
+
+    private void UnhideMonster()
+    {
+        Monster.SetActive(true);
+    }
+
+    private void HideMonster()
+    {
+        Destroy(Monster);
     }
 }
